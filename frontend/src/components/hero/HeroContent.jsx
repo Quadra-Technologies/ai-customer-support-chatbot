@@ -1,12 +1,15 @@
 const HeroContent = () => {
   return (
     <div>
-      <h1 className="text-5xl font-bold">
-        AI Customer Support Chatbot
+      <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+        AI Customer Support &
+        <br />
+        Lead Generation Platform
       </h1>
 
-      <p className="mt-4 text-lg text-gray-600">
-        Automate customer conversations with intelligent AI-powered support.
+      <p className="mt-6 text-lg text-gray-400">
+        Convert website visitors into customers
+        with intelligent AI conversations.
       </p>
     </div>
   );

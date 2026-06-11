@@ -1,6 +1,6 @@
 const HeroPreview = () => {
   return (
-    <div className="bg-white shadow-lg rounded-xl p-6 w-full max-w-md">
+    <div className="bg-white shadow-lg rounded-xl p-6 w-full max-w-md mx-auto">
       <div className="mb-4">
         <p className="font-semibold">
           User
