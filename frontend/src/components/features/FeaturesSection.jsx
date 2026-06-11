@@ -31,17 +31,26 @@ const FeaturesSection = () => {
     <section className="py-20">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold">
-            Key Features
-          </h2>
-
+        
+        <h2 className="text-3xl md:text-4xl font-bold">
+          Key Features
+        </h2>
+            
           <p className="mt-4 text-gray-600">
             Everything you need to automate support
             and generate leads.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div
+            className="
+            grid
+            grid-cols-1
+            md:grid-cols-2
+            lg:grid-cols-4
+            gap-6
+         "
+            >
           {features.map((feature, index) => (
             <FeatureCard
               key={index}
