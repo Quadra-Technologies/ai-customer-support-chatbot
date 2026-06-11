@@ -4,12 +4,11 @@ import {
   Route,
 } from "react-router-dom";
 
+import Home from "../Pages/Home/Home";
+import About from "../Pages/About/About";
+import Chat from "../Pages/Chat/Chat";
+import Contact from "../Pages/Contact/Contact";
 
-
-import Home from "../pages/Home/Home";
-import About from "../pages/About/About";
-import Chat from "../pages/Chat/Chat";
-import Contact from "../pages/Contact/Contact";
 import MainLayout from "../layouts/MainLayout";
 
 function AppRoutes() {
