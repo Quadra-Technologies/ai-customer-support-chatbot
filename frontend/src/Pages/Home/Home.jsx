@@ -1,6 +1,8 @@
 import Hero from "../../components/hero/Hero";
 import ProductOverview from "../../components/features/ProductOverview";
 import FeaturesSection from "../../components/features/FeaturesSection";
+import ContactSection from "../../components/contact/ContactSection";
+
 
 function Home() {
   return (
@@ -8,10 +10,9 @@ function Home() {
       <Hero />
       <ProductOverview />
       <FeaturesSection />
+      <ContactSection />
     </>
   );
-function Home() {
-  return <h1>Home Page</h1>;
 }
 
-export default Home;
+  export default Home;
