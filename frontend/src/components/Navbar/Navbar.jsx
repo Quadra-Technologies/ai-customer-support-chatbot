@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Navbar() {
   return (
     <nav className="bg-black text-white">
@@ -7,10 +9,10 @@ function Navbar() {
         </h2>
 
         <div className="hidden md:flex gap-8">
-          <a href="/">Home</a>
-          <a href="/about">About</a>
-          <a href="/chat">Chat</a>
-          <a href="/contact">Contact</a>
+          <Link to="/">Home</Link>
+          <Link to="/about">About</Link>
+          <Link to="/chat">Chat</Link>
+          <Link to="/contact">Contact</Link>
         </div>
 
         <button className="md:hidden">
