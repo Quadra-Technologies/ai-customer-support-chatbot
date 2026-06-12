@@ -7,11 +7,8 @@ function Home() {
   return (
     <>
       <Hero />
-
       <ProductOverview />
-
       <FeaturesSection />
-
       <ContactSection />
     </>
   );
