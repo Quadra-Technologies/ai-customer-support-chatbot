@@ -1,11 +1,12 @@
 import { useState } from "react";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import UserTable from "../../components/UserTable/UserTable";
+import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 
 const Users = () => {
   const [search, setSearch] = useState("");
 
-  const users = [
+  const [users, setUsers] = useState([
     {
       id: 1,
       name: "Bhavani",
@@ -24,7 +25,29 @@ const Users = () => {
       email: "admin@gmail.com",
       status: "Active",
     },
-  ];
+  ]);
+
+  const [showModal, setShowModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  const handleDeleteClick = (userId) => {
+    setSelectedUser(userId);
+    setShowModal(true);
+  };
+
+  const confirmDelete = () => {
+    setUsers(
+      users.filter((user) => user.id !== selectedUser)
+    );
+
+    setShowModal(false);
+    setSelectedUser(null);
+  };
+
+  const cancelDelete = () => {
+    setShowModal(false);
+    setSelectedUser(null);
+  };
 
   const filteredUsers = users.filter(
     (user) =>
@@ -49,7 +72,18 @@ const Users = () => {
         />
       </div>
 
-      <UserTable users={filteredUsers} />
+      <UserTable
+        users={filteredUsers}
+        onDelete={handleDeleteClick}
+      />
+
+      <ConfirmModal
+        isOpen={showModal}
+        title="Delete User"
+        message="Are you sure you want to delete this user?"
+        onConfirm={confirmDelete}
+        onCancel={cancelDelete}
+      />
     </div>
   );
 };

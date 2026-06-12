@@ -1,13 +1,27 @@
-const UserTable = ({ users }) => {
+const UserTable = ({
+  users,
+  onDelete,
+}) => {
   return (
     <div className="overflow-x-auto bg-white rounded-xl shadow">
       <table className="w-full">
         <thead className="bg-gray-100">
           <tr>
-            <th className="p-4 text-left">Name</th>
-            <th className="p-4 text-left">Email</th>
-            <th className="p-4 text-left">Status</th>
-            <th className="p-4 text-left">Actions</th>
+            <th className="p-4 text-left">
+              Name
+            </th>
+
+            <th className="p-4 text-left">
+              Email
+            </th>
+
+            <th className="p-4 text-left">
+              Status
+            </th>
+
+            <th className="p-4 text-left">
+              Actions
+            </th>
           </tr>
         </thead>
 
@@ -17,8 +31,13 @@ const UserTable = ({ users }) => {
               key={user.id}
               className="border-t"
             >
-              <td className="p-4">{user.name}</td>
-              <td className="p-4">{user.email}</td>
+              <td className="p-4">
+                {user.name}
+              </td>
+
+              <td className="p-4">
+                {user.email}
+              </td>
 
               <td className="p-4">
                 <span
@@ -41,7 +60,12 @@ const UserTable = ({ users }) => {
                   Block
                 </button>
 
-                <button className="bg-red-500 text-white px-3 py-1 rounded">
+                <button
+                  onClick={() =>
+                    onDelete(user.id)
+                  }
+                  className="bg-red-500 text-white px-3 py-1 rounded"
+                >
                   Delete
                 </button>
               </td>
