@@ -2,9 +2,13 @@ import { useState } from "react";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import UserTable from "../../components/UserTable/UserTable";
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
+import Pagination from "../../components/Pagination/Pagination";
+import Loader from "../../components/Loader/Loader";
+import EmptyState from "../../components/EmptyState/EmptyState";
 
 const Users = () => {
   const [search, setSearch] = useState("");
+  const [loading] = useState(false);
 
   const [users, setUsers] = useState([
     {
@@ -25,10 +29,27 @@ const Users = () => {
       email: "admin@gmail.com",
       status: "Active",
     },
+    {
+      id: 4,
+      name: "Rahul",
+      email: "rahul@gmail.com",
+      status: "Active",
+    },
+    {
+      id: 5,
+      name: "Priya",
+      email: "priya@gmail.com",
+      status: "Blocked",
+    },
   ]);
 
   const [showModal, setShowModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+
+  const [currentPage, setCurrentPage] =
+    useState(1);
+
+  const usersPerPage = 3;
 
   const handleDeleteClick = (userId) => {
     setSelectedUser(userId);
@@ -37,7 +58,9 @@ const Users = () => {
 
   const confirmDelete = () => {
     setUsers(
-      users.filter((user) => user.id !== selectedUser)
+      users.filter(
+        (user) => user.id !== selectedUser
+      )
     );
 
     setShowModal(false);
@@ -75,6 +98,21 @@ const Users = () => {
         .includes(search.toLowerCase())
   );
 
+  const indexOfLastUser =
+    currentPage * usersPerPage;
+
+  const indexOfFirstUser =
+    indexOfLastUser - usersPerPage;
+
+  const currentUsers = filteredUsers.slice(
+    indexOfFirstUser,
+    indexOfLastUser
+  );
+
+  const totalPages = Math.ceil(
+    filteredUsers.length / usersPerPage
+  );
+
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
@@ -88,11 +126,25 @@ const Users = () => {
         />
       </div>
 
-      <UserTable
-        users={filteredUsers}
-        onDelete={handleDeleteClick}
-        onBlock={handleBlockToggle}
-      />
+      {loading ? (
+        <Loader />
+      ) : filteredUsers.length === 0 ? (
+        <EmptyState message="No users found." />
+      ) : (
+        <>
+          <UserTable
+            users={currentUsers}
+            onDelete={handleDeleteClick}
+            onBlock={handleBlockToggle}
+          />
+
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            setCurrentPage={setCurrentPage}
+          />
+        </>
+      )}
 
       <ConfirmModal
         isOpen={showModal}
