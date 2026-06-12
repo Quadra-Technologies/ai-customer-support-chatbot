@@ -1,4 +1,16 @@
-const ChatInput = () => {
+import { useState } from "react";
+
+const ChatInput = ({ onSend }) => {
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = () => {
+    if (!message.trim()) return;
+
+    onSend(message);
+
+    setMessage("");
+  };
+
   return (
     <div
       className="
@@ -10,6 +22,10 @@ const ChatInput = () => {
     >
       <input
         type="text"
+        value={message}
+        onChange={(e) =>
+          setMessage(e.target.value)
+        }
         placeholder="Type your message..."
         className="
         flex-1
@@ -21,6 +37,7 @@ const ChatInput = () => {
       />
 
       <button
+        onClick={handleSubmit}
         className="
         bg-blue-600
         text-white

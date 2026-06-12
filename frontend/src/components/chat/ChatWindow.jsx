@@ -1,7 +1,6 @@
 import MessageBubble from "./MessageBubble";
-import TypingIndicator from "./TypingIndicator";
 
-const ChatWindow = () => {
+const ChatWindow = ({ messages }) => {
   return (
     <div
       className="
@@ -13,17 +12,13 @@ const ChatWindow = () => {
       p-4
       "
     >
-      <MessageBubble
-        sender="user"
-        message="Do you organize weddings?"
-      />
-
-      <MessageBubble
-        sender="bot"
-        message="Yes, we provide complete wedding planning, venue booking, decoration, catering, photography and entertainment services."
-      />
-
-      <TypingIndicator />
+      {messages.map((message, index) => (
+        <MessageBubble
+          key={index}
+          sender={message.sender}
+          message={message.text}
+        />
+      ))}
     </div>
   );
 };
