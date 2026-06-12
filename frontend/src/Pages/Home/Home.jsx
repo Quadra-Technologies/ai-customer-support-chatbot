@@ -3,6 +3,7 @@ import ProductOverview from "../../components/features/ProductOverview";
 import FeaturesSection from "../../components/features/FeaturesSection";
 import ContactSection from "../../components/contact/ContactSection";
 
+
 function Home() {
   return (
     <>
@@ -14,4 +15,4 @@ function Home() {
   );
 }
 
-export default Home;
+  export default Home;
