@@ -11,38 +11,40 @@ const Chats = () => {
   const [chats, setChats] = useState([
     {
       id: 1,
-      user: "Bhavani",
-      message: "I need help with pricing.",
+      customer: "Bhavani",
+      messages: 15,
+      leadGenerated: true,
       date: "12-06-2026",
     },
     {
       id: 2,
-      user: "Shruthi",
-      message: "How do I deploy the app?",
-      date: "12-06-2026",
-    },
-    {
-      id: 3,
-      user: "Rahul",
-      message: "What are your services?",
+      customer: "Rahul",
+      messages: 8,
+      leadGenerated: false,
       date: "11-06-2026",
     },
     {
-      id: 4,
-      user: "Priya",
-      message: "Can I get a demo?",
+      id: 3,
+      customer: "Priya",
+      messages: 22,
+      leadGenerated: true,
       date: "10-06-2026",
     },
   ]);
 
-  const [showModal, setShowModal] = useState(false);
-  const [selectedChat, setSelectedChat] = useState(null);
+  const [showModal, setShowModal] =
+    useState(false);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const chatsPerPage = 3;
+  const [selectedChat, setSelectedChat] =
+    useState(null);
 
-  const handleDeleteClick = (chatId) => {
-    setSelectedChat(chatId);
+  const [currentPage, setCurrentPage] =
+    useState(1);
+
+  const chatsPerPage = 5;
+
+  const handleDelete = (id) => {
+    setSelectedChat(id);
     setShowModal(true);
   };
 
@@ -64,10 +66,7 @@ const Chats = () => {
 
   const filteredChats = chats.filter(
     (chat) =>
-      chat.user
-        .toLowerCase()
-        .includes(search.toLowerCase()) ||
-      chat.message
+      chat.customer
         .toLowerCase()
         .includes(search.toLowerCase())
   );
@@ -78,10 +77,11 @@ const Chats = () => {
   const indexOfFirstChat =
     indexOfLastChat - chatsPerPage;
 
-  const currentChats = filteredChats.slice(
-    indexOfFirstChat,
-    indexOfLastChat
-  );
+  const currentChats =
+    filteredChats.slice(
+      indexOfFirstChat,
+      indexOfLastChat
+    );
 
   const totalPages = Math.ceil(
     filteredChats.length / chatsPerPage
@@ -91,7 +91,7 @@ const Chats = () => {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">
-          Chat Management
+          Chat Monitoring
         </h1>
 
         <SearchBar
@@ -106,7 +106,7 @@ const Chats = () => {
         <>
           <ChatTable
             chats={currentChats}
-            onDelete={handleDeleteClick}
+            onDelete={handleDelete}
           />
 
           <Pagination
