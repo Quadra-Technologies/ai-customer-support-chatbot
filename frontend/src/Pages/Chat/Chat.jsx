@@ -1,10 +1,7 @@
-function Chat() {
-  return (
-    <div>
-      <h1>Chat Page</h1>
-    </div>
-  );
-  return <h1>Chat Page</h1>;
-}
+import ChatPage from "../../components/chat/ChatPage";
+
+const Chat = () => {
+  return <ChatPage />;
+};
 
 export default Chat;

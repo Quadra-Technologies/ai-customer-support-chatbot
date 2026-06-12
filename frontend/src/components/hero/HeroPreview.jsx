@@ -7,7 +7,7 @@ const HeroPreview = () => {
         </p>
 
         <div className="bg-gray-100 p-3 rounded-lg mt-2">
-          What services do you provide?
+          Do you organize weddings?
         </div>
       </div>
 
@@ -17,8 +17,9 @@ const HeroPreview = () => {
         </p>
 
         <div className="bg-blue-100 p-3 rounded-lg mt-2">
-          We provide AI-powered customer support
-          and lead generation solutions.
+          Yes, we provide complete wedding planning,
+          venue booking, decoration, catering,
+          photography and entertainment services.
         </div>
       </div>
     </div>
