@@ -49,6 +49,22 @@ const Users = () => {
     setSelectedUser(null);
   };
 
+  const handleBlockToggle = (userId) => {
+    setUsers(
+      users.map((user) =>
+        user.id === userId
+          ? {
+              ...user,
+              status:
+                user.status === "Active"
+                  ? "Blocked"
+                  : "Active",
+            }
+          : user
+      )
+    );
+  };
+
   const filteredUsers = users.filter(
     (user) =>
       user.name
@@ -75,6 +91,7 @@ const Users = () => {
       <UserTable
         users={filteredUsers}
         onDelete={handleDeleteClick}
+        onBlock={handleBlockToggle}
       />
 
       <ConfirmModal

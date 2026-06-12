@@ -1,6 +1,7 @@
 const UserTable = ({
   users,
   onDelete,
+  onBlock,
 }) => {
   return (
     <div className="overflow-x-auto bg-white rounded-xl shadow">
@@ -56,8 +57,19 @@ const UserTable = ({
                   View
                 </button>
 
-                <button className="bg-yellow-500 text-white px-3 py-1 rounded">
-                  Block
+                <button
+                  onClick={() =>
+                    onBlock(user.id)
+                  }
+                  className={`text-white px-3 py-1 rounded ${
+                    user.status === "Active"
+                      ? "bg-yellow-500"
+                      : "bg-green-500"
+                  }`}
+                >
+                  {user.status === "Active"
+                    ? "Block"
+                    : "Unblock"}
                 </button>
 
                 <button
