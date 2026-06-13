@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
 import AdminLayout from "../layouts/AdminLayout";
+import ProtectedRoute from "./ProtectedRoute";
 
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Users from "../pages/Users/Users";
@@ -13,16 +14,40 @@ import Login from "../pages/Login/Login";
 const AdminRoutes = () => {
   return (
     <Routes>
-      <Route path="/admin/login" element={<Login />} />
+      {/* Public Route */}
+      <Route
+        path="/admin/login"
+        element={<Login />}
+      />
 
-      <Route path="/admin" element={<AdminLayout />}>
-        <Route index element={<Dashboard />} />
+      {/* Protected Routes */}
+      <Route
+        path="/admin"
+        element={
+          <ProtectedRoute>
+            <AdminLayout />
+          </ProtectedRoute>
+        }
+      >
+        <Route
+          index
+          element={<Dashboard />}
+        />
 
-        <Route path="users" element={<Users />} />
+        <Route
+          path="users"
+          element={<Users />}
+        />
 
-        <Route path="chats" element={<Chats />} />
+        <Route
+          path="chats"
+          element={<Chats />}
+        />
 
-        <Route path="leads" element={<Leads />} />
+        <Route
+          path="leads"
+          element={<Leads />}
+        />
 
         <Route
           path="analytics"

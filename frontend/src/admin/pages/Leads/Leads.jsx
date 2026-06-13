@@ -4,6 +4,7 @@ import LeadTable from "../../components/LeadTable/LeadTable";
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 import Pagination from "../../components/Pagination/Pagination";
 import EmptyState from "../../components/EmptyState/EmptyState";
+import LeadDetailsModal from "../../components/LeadDetailsModal/LeadDetailsModal";
 
 const Leads = () => {
   const [search, setSearch] = useState("");
@@ -47,32 +48,41 @@ const Leads = () => {
     },
   ]);
 
+  // Delete Modal
   const [showModal, setShowModal] = useState(false);
+  const [deleteLeadId, setDeleteLeadId] = useState(null);
+
+  // View Details Modal
+  const [showDetails, setShowDetails] = useState(false);
   const [selectedLead, setSelectedLead] = useState(null);
 
+  // Pagination
   const [currentPage, setCurrentPage] = useState(1);
   const leadsPerPage = 5;
 
+  // Delete Lead
   const handleDelete = (id) => {
-    setSelectedLead(id);
+    setDeleteLeadId(id);
     setShowModal(true);
   };
 
   const confirmDelete = () => {
     setLeads(
       leads.filter(
-        (lead) => lead.id !== selectedLead
+        (lead) => lead.id !== deleteLeadId
       )
     );
+
     setShowModal(false);
-    setSelectedLead(null);
+    setDeleteLeadId(null);
   };
 
   const cancelDelete = () => {
     setShowModal(false);
-    setSelectedLead(null);
+    setDeleteLeadId(null);
   };
 
+  // Change Status
   const handleStatusChange = (
     id,
     newStatus
@@ -89,6 +99,13 @@ const Leads = () => {
     );
   };
 
+  // View Lead Details
+  const handleView = (lead) => {
+    setSelectedLead(lead);
+    setShowDetails(true);
+  };
+
+  // Search
   const filteredLeads = leads.filter(
     (lead) =>
       lead.name
@@ -99,6 +116,7 @@ const Leads = () => {
         .includes(search.toLowerCase())
   );
 
+  // Pagination Logic
   const indexOfLastLead =
     currentPage * leadsPerPage;
 
@@ -138,12 +156,15 @@ const Leads = () => {
             onStatusChange={
               handleStatusChange
             }
+            onView={handleView}
           />
 
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
-            setCurrentPage={setCurrentPage}
+            setCurrentPage={
+              setCurrentPage
+            }
           />
         </>
       )}
@@ -154,6 +175,14 @@ const Leads = () => {
         message="Are you sure you want to delete this lead?"
         onConfirm={confirmDelete}
         onCancel={cancelDelete}
+      />
+
+      <LeadDetailsModal
+        isOpen={showDetails}
+        lead={selectedLead}
+        onClose={() =>
+          setShowDetails(false)
+        }
       />
     </div>
   );

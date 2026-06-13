@@ -2,6 +2,7 @@ const LeadTable = ({
   leads,
   onDelete,
   onStatusChange,
+  onView,
 }) => {
   return (
     <div className="overflow-x-auto bg-white rounded-xl shadow">
@@ -23,11 +24,22 @@ const LeadTable = ({
           {leads.map((lead) => (
             <tr key={lead.id} className="border-t">
               <td className="p-3">{lead.name}</td>
+
               <td className="p-3">{lead.email}</td>
+
               <td className="p-3">{lead.phone}</td>
-              <td className="p-3">{lead.eventType}</td>
-              <td className="p-3">{lead.guests}</td>
-              <td className="p-3">₹{lead.budget}</td>
+
+              <td className="p-3">
+                {lead.eventType}
+              </td>
+
+              <td className="p-3">
+                {lead.guests}
+              </td>
+
+              <td className="p-3">
+                ₹{lead.budget}
+              </td>
 
               <td className="p-3">
                 <select
@@ -43,13 +55,24 @@ const LeadTable = ({
                   <option>New</option>
                   <option>Contacted</option>
                   <option>Qualified</option>
-                  <option>Proposal Sent</option>
+                  <option>
+                    Proposal Sent
+                  </option>
                   <option>Booked</option>
                   <option>Rejected</option>
                 </select>
               </td>
 
-              <td className="p-3">
+              <td className="p-3 space-x-2">
+                <button
+                  onClick={() =>
+                    onView(lead)
+                  }
+                  className="bg-blue-500 text-white px-3 py-1 rounded"
+                >
+                  View
+                </button>
+
                 <button
                   onClick={() =>
                     onDelete(lead.id)
