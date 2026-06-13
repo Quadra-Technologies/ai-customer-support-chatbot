@@ -10,30 +10,35 @@ import Chat from "../Pages/Chat/Chat";
 import Contact from "../Pages/Contact/Contact";
 
 import MainLayout from "../layouts/MainLayout";
+import AdminRoutes from "../admin/routes/AdminRoutes";
 
 function AppRoutes() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route element={<MainLayout />}>
-          <Route path="/" element={<Home />} />
+      <>
+        <AdminRoutes />
 
-          <Route
-            path="/about"
-            element={<About />}
-          />
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<Home />} />
 
-          <Route
-            path="/chat"
-            element={<Chat />}
-          />
+            <Route
+              path="/about"
+              element={<About />}
+            />
 
-          <Route
-            path="/contact"
-            element={<Contact />}
-          />
-        </Route>
-      </Routes>
+            <Route
+              path="/chat"
+              element={<Chat />}
+            />
+
+            <Route
+              path="/contact"
+              element={<Contact />}
+            />
+          </Route>
+        </Routes>
+      </>
     </BrowserRouter>
   );
 }
