@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { CSVLink } from "react-csv";
+
 import SearchBar from "../../components/SearchBar/SearchBar";
 import LeadTable from "../../components/LeadTable/LeadTable";
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
@@ -48,41 +50,37 @@ const Leads = () => {
     },
   ]);
 
-  // Delete Modal
   const [showModal, setShowModal] = useState(false);
-  const [deleteLeadId, setDeleteLeadId] = useState(null);
+  const [selectedLeadId, setSelectedLeadId] = useState(null);
 
-  // View Details Modal
-  const [showDetails, setShowDetails] = useState(false);
   const [selectedLead, setSelectedLead] = useState(null);
+  const [showDetails, setShowDetails] = useState(false);
 
-  // Pagination
   const [currentPage, setCurrentPage] = useState(1);
+
   const leadsPerPage = 5;
 
-  // Delete Lead
   const handleDelete = (id) => {
-    setDeleteLeadId(id);
+    setSelectedLeadId(id);
     setShowModal(true);
   };
 
   const confirmDelete = () => {
     setLeads(
       leads.filter(
-        (lead) => lead.id !== deleteLeadId
+        (lead) => lead.id !== selectedLeadId
       )
     );
 
     setShowModal(false);
-    setDeleteLeadId(null);
+    setSelectedLeadId(null);
   };
 
   const cancelDelete = () => {
     setShowModal(false);
-    setDeleteLeadId(null);
+    setSelectedLeadId(null);
   };
 
-  // Change Status
   const handleStatusChange = (
     id,
     newStatus
@@ -99,13 +97,11 @@ const Leads = () => {
     );
   };
 
-  // View Lead Details
   const handleView = (lead) => {
     setSelectedLead(lead);
     setShowDetails(true);
   };
 
-  // Search
   const filteredLeads = leads.filter(
     (lead) =>
       lead.name
@@ -116,7 +112,6 @@ const Leads = () => {
         .includes(search.toLowerCase())
   );
 
-  // Pagination Logic
   const indexOfLastLead =
     currentPage * leadsPerPage;
 
@@ -135,15 +130,25 @@ const Leads = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
         <h1 className="text-3xl font-bold">
           Leads Management
         </h1>
 
-        <SearchBar
-          search={search}
-          setSearch={setSearch}
-        />
+        <div className="flex flex-col md:flex-row gap-3">
+          <SearchBar
+            search={search}
+            setSearch={setSearch}
+          />
+
+          <CSVLink
+            data={leads}
+            filename="event-leads.csv"
+            className="bg-green-600 text-white px-4 py-2 rounded-lg text-center"
+          >
+            Export CSV
+          </CSVLink>
+        </div>
       </div>
 
       {filteredLeads.length === 0 ? (
@@ -162,9 +167,7 @@ const Leads = () => {
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
-            setCurrentPage={
-              setCurrentPage
-            }
+            setCurrentPage={setCurrentPage}
           />
         </>
       )}
