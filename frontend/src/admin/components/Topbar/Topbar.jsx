@@ -1,6 +1,9 @@
+import { FaBars } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const Topbar = () => {
+const Topbar = ({
+  setSidebarOpen,
+}) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -13,9 +16,20 @@ const Topbar = () => {
 
   return (
     <div className="h-16 bg-white shadow px-6 flex items-center justify-between">
-      <h2 className="text-xl font-semibold">
-        Admin Dashboard
-      </h2>
+      <div className="flex items-center gap-4">
+        <button
+          className="md:hidden"
+          onClick={() =>
+            setSidebarOpen(true)
+          }
+        >
+          <FaBars size={20} />
+        </button>
+
+        <h2 className="text-xl font-semibold">
+          Admin Dashboard
+        </h2>
+      </div>
 
       <button
         onClick={handleLogout}
