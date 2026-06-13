@@ -1,30 +1,40 @@
 const mongoose = require("mongoose");
 
 const leadSchema = new mongoose.Schema(
-  {
-    name: String,
+{
+    name:{
+        type:String,
+        required:true
+    },
 
-    email: String,
+    email:{
+        type:String,
+        required:true
+    },
 
-    phone: String,
+    phone:{
+        type:String,
+        required:true
+    },
 
-    requirement: String,
+    requirement:{
+        type:String
+    },
 
-    status: {
-      type: String,
-      enum: [
-        "New",
-        "Contacted",
-        "Qualified",
-        "Won",
-        "Lost"
-      ],
-      default: "New"
+    status:{
+        type:String,
+        enum:["New","Contacted","Qualified","Won","Lost"],
+        default:"New"
+    },
+
+    source:{
+        type:String,
+        default:"Website"
     }
-  },
-  {
-    timestamps: true
-  }
+},
+{
+    timestamps:true
+}
 );
 
 module.exports = mongoose.model("Lead", leadSchema);
