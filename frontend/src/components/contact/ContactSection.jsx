@@ -22,7 +22,7 @@ const ContactSection = () => {
             font-bold
             "
           >
-            Get Started Today
+            Plan Your Event With Us
           </h2>
 
           <p
@@ -31,8 +31,8 @@ const ContactSection = () => {
             text-gray-600
             "
           >
-            Share your requirements and our team
-            will get back to you.
+            Tell us about your event and our team
+            will contact you shortly.
           </p>
         </div>
 

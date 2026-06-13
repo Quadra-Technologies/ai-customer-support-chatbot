@@ -24,9 +24,15 @@ const LeadForm = () => {
         placeholder="Enter your phone number"
       />
 
+      <FormInput
+        label="Event Type"
+        type="text"
+        placeholder="Wedding, Birthday, Corporate Event..."
+      />
+
       <FormTextarea
-        label="Business Requirement"
-        placeholder="Tell us about your project"
+        label="Event Requirement"
+        placeholder="Tell us about your event, expected guests, catering and decoration requirements"
       />
 
       <SubmitButton />
