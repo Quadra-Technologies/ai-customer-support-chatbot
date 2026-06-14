@@ -80,7 +80,7 @@ exports.deleteLead = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            message: "Lead deleted successfully"
+            message: "Lead deleted"
         });
 
     } catch (error) {
