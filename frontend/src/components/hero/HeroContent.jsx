@@ -2,14 +2,12 @@ const HeroContent = () => {
   return (
     <div>
       <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-        AI Customer Support &
-        <br />
-        Lead Generation Platform
+        Dream Events Planners
       </h1>
 
       <p className="mt-6 text-lg text-gray-400">
-        Convert website visitors into customers
-        with intelligent AI conversations.
+        Creating unforgettable weddings,
+        birthdays, corporate events and celebrations.
       </p>
     </div>
   );

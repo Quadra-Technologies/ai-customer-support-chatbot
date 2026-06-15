@@ -3,13 +3,16 @@ const ProductOverview = () => {
     <section className="py-20 bg-gray-50">
       <div className="max-w-6xl mx-auto px-6 text-center">
         <h2 className="text-4xl font-bold">
-          Product Overview
+          About Dream Event Planners
         </h2>
 
         <p className="mt-6 text-lg text-gray-600 max-w-3xl mx-auto">
-          Our AI Customer Support & Lead Generation Platform
-          helps businesses automate customer interactions,
-          answer queries instantly, and convert visitors into leads.
+          Dream Event Planners specializes in creating
+          memorable weddings, birthday celebrations,
+          corporate events, engagements and special occasions.
+          From venue selection and decoration to catering
+          and entertainment, we handle every detail to make
+          your event a grand success.
         </p>
       </div>
     </section>

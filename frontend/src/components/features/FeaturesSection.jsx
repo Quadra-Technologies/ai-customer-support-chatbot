@@ -3,27 +3,27 @@ import FeatureCard from "./FeatureCard";
 const FeaturesSection = () => {
   const features = [
     {
-      title: "AI Chat Support",
+      title: "Wedding Planning",
       description:
-        "Provide instant responses using AI-powered conversations.",
+        "Complete wedding management from venue booking to decoration.",
     },
 
     {
-      title: "Lead Generation",
+      title: "Birthday Events",
       description:
-        "Capture potential customer information automatically.",
+        "Creative birthday celebrations for children and adults.",
     },
 
     {
-      title: "Analytics Dashboard",
+      title: "Corporate Events",
       description:
-        "Track leads, chats, and business performance.",
+        "Professional conferences, meetings and business events.",
     },
 
     {
-      title: "Business Automation",
+      title: "Catering & Decoration",
       description:
-        "Reduce manual work through AI-driven workflows.",
+        "Food, decoration and entertainment arrangements for every event.",
     },
   ];
 
@@ -31,26 +31,25 @@ const FeaturesSection = () => {
     <section className="py-20">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-12">
-        
-        <h2 className="text-3xl md:text-4xl font-bold">
-          Key Features
-        </h2>
-            
+          <h2 className="text-3xl md:text-4xl font-bold">
+            Our Event Services
+          </h2>
+
           <p className="mt-4 text-gray-600">
-            Everything you need to automate support
-            and generate leads.
+            Everything you need to plan and manage
+            unforgettable events.
           </p>
         </div>
 
-          <div
-            className="
-            grid
-            grid-cols-1
-            md:grid-cols-2
-            lg:grid-cols-4
-            gap-6
-         "
-            >
+        <div
+          className="
+          grid
+          grid-cols-1
+          md:grid-cols-2
+          lg:grid-cols-4
+          gap-6
+          "
+        >
           {features.map((feature, index) => (
             <FeatureCard
               key={index}
