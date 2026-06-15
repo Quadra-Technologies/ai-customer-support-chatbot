@@ -8,6 +8,7 @@ const connectDB = require("./config/db");
 const leadRoutes = require("./routes/leadRoutes");
 const chatRoutes = require("./routes/chatRoutes");
 const conversationRoutes = require("./routes/conversationRoutes");
+const analyticsRoutes = require("./routes/analyticsRoutes");
 
 const app = express();
 
@@ -29,6 +30,8 @@ app.use("/api/leads", leadRoutes);
 // Chat Routes
 app.use("/api/chat", chatRoutes);
 app.use("/api/conversations", conversationRoutes);
+app.use("/api/analytics", analyticsRoutes);
+app.use("/api/analytics", analyticsRoutes);
 
 const PORT = process.env.PORT || 5000;
 
