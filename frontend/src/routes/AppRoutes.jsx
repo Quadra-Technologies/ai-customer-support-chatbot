@@ -16,7 +16,7 @@ function AppRoutes() {
   return (
     <BrowserRouter>
       <>
-        <AdminRoutes />
+        {/* <AdminRoutes /> */}
 
         <Routes>
           <Route element={<MainLayout />}>
