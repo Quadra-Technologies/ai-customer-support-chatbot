@@ -9,6 +9,7 @@ const leadRoutes = require("./routes/leadRoutes");
 const chatRoutes = require("./routes/chatRoutes");
 const conversationRoutes = require("./routes/conversationRoutes");
 const analyticsRoutes = require("./routes/analyticsRoutes");
+const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 
@@ -24,13 +25,15 @@ app.get("/", (req, res) => {
     res.send("Backend Running");
 });
 
-// Lead Routes
+// Routes
+app.use("/api/auth", authRoutes);
+
 app.use("/api/leads", leadRoutes);
 
-// Chat Routes
 app.use("/api/chat", chatRoutes);
+
 app.use("/api/conversations", conversationRoutes);
-app.use("/api/analytics", analyticsRoutes);
+
 app.use("/api/analytics", analyticsRoutes);
 
 const PORT = process.env.PORT || 5000;
