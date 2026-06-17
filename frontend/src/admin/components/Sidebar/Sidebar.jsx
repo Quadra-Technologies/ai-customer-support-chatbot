@@ -1,112 +1,87 @@
-import { NavLink } from "react-router-dom";
 import {
-  FaTachometerAlt,
-  FaUsers,
-  FaComments,
-  FaUserTie,
-  FaChartBar,
-  FaCog,
-  FaTimes,
-} from "react-icons/fa";
+  LayoutDashboard,
+  Users,
+  MessageCircle,
+  UserRoundCheck,
+  BarChart3,
+  Settings,
+} from "lucide-react";
 
-const Sidebar = ({
-  sidebarOpen,
-  setSidebarOpen,
-}) => {
+import { NavLink } from "react-router-dom";
+
+const Sidebar = () => {
   const menuItems = [
     {
       name: "Dashboard",
-      path: "/admin",
-      icon: <FaTachometerAlt />,
+      path: "/admin/dashboard",
+      icon: <LayoutDashboard size={18} />,
     },
     {
       name: "Users",
       path: "/admin/users",
-      icon: <FaUsers />,
+      icon: <Users size={18} />,
     },
     {
       name: "Chats",
       path: "/admin/chats",
-      icon: <FaComments />,
+      icon: <MessageCircle size={18} />,
     },
     {
       name: "Leads",
       path: "/admin/leads",
-      icon: <FaUserTie />,
+      icon: <UserRoundCheck size={18} />,
     },
     {
       name: "Analytics",
       path: "/admin/analytics",
-      icon: <FaChartBar />,
+      icon: <BarChart3 size={18} />,
     },
     {
       name: "Settings",
       path: "/admin/settings",
-      icon: <FaCog />,
+      icon: <Settings size={18} />,
     },
   ];
 
   return (
-    <>
-      {sidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 z-40 md:hidden"
-          onClick={() =>
-            setSidebarOpen(false)
-          }
-        />
-      )}
+    <aside
+      className="
+      w-64
+      min-h-screen
+      bg-gradient-to-b
+      from-slate-900
+      to-indigo-900
+      text-white
+      p-5
+      shadow-2xl
+      "
+    >
+      <h1 className="text-3xl font-bold mb-10">
+        Admin Panel
+      </h1>
 
-      <div
-        className={`fixed md:static z-50 w-64 min-h-screen bg-slate-900 text-white p-5 transform transition-transform duration-300 ${
-          sidebarOpen
-            ? "translate-x-0"
-            : "-translate-x-full md:translate-x-0"
-        }`}
-      >
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-2xl font-bold">
-            Admin Panel
-          </h1>
-
-          <button
-            className="md:hidden"
-            onClick={() =>
-              setSidebarOpen(false)
+      <nav className="space-y-3">
+        {menuItems.map((item) => (
+          <NavLink
+            key={item.path}
+            to={item.path}
+            className={({ isActive }) =>
+              `flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ${
+                isActive
+                  ? "bg-indigo-600 shadow-lg"
+                  : "hover:bg-slate-700"
+              }`
             }
           >
-            <FaTimes />
-          </button>
-        </div>
+            {item.icon}
 
-        <nav className="space-y-2">
-          {menuItems.map((item) => (
-            <NavLink
-              key={item.path}
-              to={item.path}
-              end={
-                item.path === "/admin"
-              }
-              onClick={() =>
-                setSidebarOpen(false)
-              }
-              className={({
-                isActive,
-              }) =>
-                `flex items-center gap-3 p-3 rounded-lg transition-all ${
-                  isActive
-                    ? "bg-blue-600"
-                    : "hover:bg-slate-800"
-                }`
-              }
-            >
-              {item.icon}
+            <span className="font-medium">
               {item.name}
-            </NavLink>
-          ))}
-        </nav>
-      </div>
-    </>
+            </span>
+          </NavLink>
+        ))}
+      </nav>
+    </aside>
   );
 };
 

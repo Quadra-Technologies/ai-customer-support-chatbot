@@ -2,7 +2,9 @@ import api from "./api";
 
 export const getLeads = async () => {
   const response = await api.get("/leads");
-  return response.data;
+
+  // Returns only the leads array
+  return response.data.data;
 };
 
 export const createLead = async (
@@ -28,7 +30,9 @@ export const updateLeadStatus = async (
   return response.data;
 };
 
-export const deleteLead = async (id) => {
+export const deleteLead = async (
+  id
+) => {
   const response = await api.delete(
     `/leads/${id}`
   );

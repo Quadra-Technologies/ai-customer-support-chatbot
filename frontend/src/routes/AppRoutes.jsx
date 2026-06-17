@@ -14,25 +14,31 @@ import AdminRoutes from "../admin/routes/AdminRoutes";
 function AppRoutes() {
   return (
     <BrowserRouter>
-      <>
-        {/* <AdminRoutes /> */}
+      <Routes>
+        {/* Website Routes */}
+        <Route element={<MainLayout />}>
+          <Route
+            path="/"
+            element={<Home />}
+          />
 
-        <Routes>
-          <Route element={<MainLayout />}>
-            <Route path="/" element={<Home />} />
+          <Route
+            path="/about"
+            element={<About />}
+          />
 
-            <Route
-              path="/about"
-              element={<About />}
-            />
+          <Route
+            path="/contact"
+            element={<Contact />}
+          />
+        </Route>
 
-            <Route
-              path="/contact"
-              element={<Contact />}
-            />
-          </Route>
-        </Routes>
-      </>
+        {/* Admin Routes */}
+        <Route
+          path="/admin/*"
+          element={<AdminRoutes />}
+        />
+      </Routes>
     </BrowserRouter>
   );
 }
