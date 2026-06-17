@@ -14,15 +14,15 @@ import Login from "../pages/Login/Login";
 const AdminRoutes = () => {
   return (
     <Routes>
-      {/* Public Route */}
+      {/* Login Route */}
       <Route
-        path="/admin/login"
+        path="login"
         element={<Login />}
       />
 
-      {/* Protected Routes */}
+      {/* Admin Pages */}
       <Route
-        path="/admin"
+        path="/"
         element={
           <ProtectedRoute>
             <AdminLayout />
@@ -31,6 +31,11 @@ const AdminRoutes = () => {
       >
         <Route
           index
+          element={<Dashboard />}
+        />
+
+        <Route
+          path="dashboard"
           element={<Dashboard />}
         />
 

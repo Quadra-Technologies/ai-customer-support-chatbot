@@ -5,9 +5,9 @@ const LeadTable = ({
   onView,
 }) => {
   return (
-    <div className="overflow-x-auto bg-white rounded-xl shadow">
+    <div className="overflow-x-auto bg-white rounded-2xl shadow-lg border border-gray-100">
       <table className="w-full">
-        <thead className="bg-gray-100">
+        <thead className="bg-slate-50 text-slate-700">
           <tr>
             <th className="p-3 text-left">Name</th>
             <th className="p-3 text-left">Email</th>
@@ -23,7 +23,7 @@ const LeadTable = ({
           {leads.map((lead) => (
             <tr
               key={lead._id}
-              className="border-t"
+              className="border-t hover:bg-slate-50 transition"
             >
               <td className="p-3">
                 {lead.name}
@@ -50,7 +50,7 @@ const LeadTable = ({
                       e.target.value
                     )
                   }
-                  className="border rounded p-1"
+                  className="border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 >
                   <option>New</option>
                   <option>Contacted</option>
@@ -72,7 +72,7 @@ const LeadTable = ({
                   onClick={() =>
                     onView(lead)
                   }
-                  className="bg-blue-500 text-white px-3 py-1 rounded"
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 rounded-lg transition shadow"
                 >
                   View
                 </button>
@@ -81,7 +81,7 @@ const LeadTable = ({
                   onClick={() =>
                     onDelete(lead._id)
                   }
-                  className="bg-red-500 text-white px-3 py-1 rounded"
+                  className="bg-rose-500 hover:bg-rose-600 text-white px-3 py-1 rounded-lg transition shadow"
                 >
                   Delete
                 </button>
