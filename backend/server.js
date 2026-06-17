@@ -5,6 +5,8 @@ const cors = require("cors");
 
 const connectDB = require("./config/db");
 
+// Route Imports
+const authRoutes = require("./routes/authRoutes");
 const leadRoutes = require("./routes/leadRoutes");
 const chatRoutes = require("./routes/chatRoutes");
 const conversationRoutes = require("./routes/conversationRoutes");
@@ -21,20 +23,19 @@ app.use(express.json());
 
 // Home Route
 app.get("/", (req, res) => {
-    res.send("Backend Running");
+  res.send("Backend Running");
 });
 
-// Lead Routes
+// API Routes
+app.use("/api/auth", authRoutes);
 app.use("/api/leads", leadRoutes);
-
-// Chat Routes
 app.use("/api/chat", chatRoutes);
 app.use("/api/conversations", conversationRoutes);
 app.use("/api/analytics", analyticsRoutes);
-app.use("/api/analytics", analyticsRoutes);
 
+// Server
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-    console.log(`Server running on ${PORT}`);
+  console.log(`Server running on ${PORT}`);
 });

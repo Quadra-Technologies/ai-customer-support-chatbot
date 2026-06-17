@@ -1,25 +1,49 @@
 # Database Schema
 
-## Collections
+## Users
 
-### Users
-- name
-- email
-- password
-- role
+```json
+{
+  "name": "string",
+  "email": "string",
+  "password": "string",
+  "role": "string"
+}
+```
 
-### Leads
-- name
-- email
-- phone
-- requirement
-- status
+---
 
-### Conversations
-- userId
-- messages
+## Leads
 
-### FAQs
-- question
-- answer
-- category
+```json
+{
+  "name": "string",
+  "email": "string",
+  "phone": "string",
+  "requirement": "string",
+  "status": "string"
+}
+```
+
+---
+
+## Conversations
+
+```json
+{
+  "userMessage": "string",
+  "aiResponse": "string",
+  "timestamp": "date"
+}
+```
+
+---
+
+## FAQs
+
+```json
+{
+  "question": "string",
+  "answer": "string"
+}
+```
