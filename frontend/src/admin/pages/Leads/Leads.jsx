@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CSVLink } from "react-csv";
 
 import SearchBar from "../../components/SearchBar/SearchBar";
@@ -7,73 +7,81 @@ import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 import Pagination from "../../components/Pagination/Pagination";
 import EmptyState from "../../components/EmptyState/EmptyState";
 import LeadDetailsModal from "../../components/LeadDetailsModal/LeadDetailsModal";
+import Loader from "../../components/Loader/Loader";
+
+import {
+  getLeads,
+  updateLeadStatus,
+  deleteLead,
+} from "../../../services/leadApi";
 
 const Leads = () => {
   const [search, setSearch] = useState("");
-
-  const [leads, setLeads] = useState([
-    {
-      id: 1,
-      name: "Bhavani",
-      email: "bhavani@gmail.com",
-      phone: "9876543210",
-      eventType: "Wedding",
-      guests: 500,
-      catering: "Premium",
-      decor: "Royal",
-      budget: 500000,
-      status: "New",
-    },
-    {
-      id: 2,
-      name: "Rahul",
-      email: "rahul@gmail.com",
-      phone: "9123456789",
-      eventType: "Birthday",
-      guests: 100,
-      catering: "Standard",
-      decor: "Modern",
-      budget: 100000,
-      status: "Contacted",
-    },
-    {
-      id: 3,
-      name: "Priya",
-      email: "priya@gmail.com",
-      phone: "9988776655",
-      eventType: "Corporate Event",
-      guests: 300,
-      catering: "Premium",
-      decor: "Luxury",
-      budget: 300000,
-      status: "Qualified",
-    },
-  ]);
+  const [leads, setLeads] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const [showModal, setShowModal] = useState(false);
-  const [selectedLeadId, setSelectedLeadId] = useState(null);
+  const [selectedLeadId, setSelectedLeadId] =
+    useState(null);
 
-  const [selectedLead, setSelectedLead] = useState(null);
-  const [showDetails, setShowDetails] = useState(false);
+  const [selectedLead, setSelectedLead] =
+    useState(null);
+  const [showDetails, setShowDetails] =
+    useState(false);
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] =
+    useState(1);
 
   const leadsPerPage = 5;
+
+  const fetchLeads = async () => {
+    try {
+      setLoading(true);
+
+      const data = await getLeads();
+
+      // Supports both:
+      // { success: true, data: [...] }
+      // [...]
+      setLeads(data.data || data);
+    } catch (error) {
+      console.error(
+        "Error fetching leads:",
+        error
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchLeads();
+  }, []);
+
+  // Reset pagination on search
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search]);
 
   const handleDelete = (id) => {
     setSelectedLeadId(id);
     setShowModal(true);
   };
 
-  const confirmDelete = () => {
-    setLeads(
-      leads.filter(
-        (lead) => lead.id !== selectedLeadId
-      )
-    );
+  const confirmDelete = async () => {
+    try {
+      await deleteLead(selectedLeadId);
 
-    setShowModal(false);
-    setSelectedLeadId(null);
+      await fetchLeads();
+
+      setShowModal(false);
+      setSelectedLeadId(null);
+    } catch (error) {
+      console.error(
+        "Delete failed:",
+        error
+      );
+    }
   };
 
   const cancelDelete = () => {
@@ -81,20 +89,23 @@ const Leads = () => {
     setSelectedLeadId(null);
   };
 
-  const handleStatusChange = (
+  const handleStatusChange = async (
     id,
     newStatus
   ) => {
-    setLeads(
-      leads.map((lead) =>
-        lead.id === id
-          ? {
-              ...lead,
-              status: newStatus,
-            }
-          : lead
-      )
-    );
+    try {
+      await updateLeadStatus(
+        id,
+        newStatus
+      );
+
+      await fetchLeads();
+    } catch (error) {
+      console.error(
+        "Status update failed:",
+        error
+      );
+    }
   };
 
   const handleView = (lead) => {
@@ -105,10 +116,10 @@ const Leads = () => {
   const filteredLeads = leads.filter(
     (lead) =>
       lead.name
-        .toLowerCase()
+        ?.toLowerCase()
         .includes(search.toLowerCase()) ||
       lead.email
-        .toLowerCase()
+        ?.toLowerCase()
         .includes(search.toLowerCase())
   );
 
@@ -127,6 +138,10 @@ const Leads = () => {
   const totalPages = Math.ceil(
     filteredLeads.length / leadsPerPage
   );
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div>
@@ -167,7 +182,9 @@ const Leads = () => {
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
-            setCurrentPage={setCurrentPage}
+            setCurrentPage={
+              setCurrentPage
+            }
           />
         </>
       )}

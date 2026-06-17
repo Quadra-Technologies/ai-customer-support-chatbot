@@ -6,7 +6,6 @@ import {
 
 import Home from "../Pages/Home/Home";
 import About from "../Pages/About/About";
-import Chat from "../Pages/Chat/Chat";
 import Contact from "../Pages/Contact/Contact";
 
 import MainLayout from "../layouts/MainLayout";
@@ -15,30 +14,31 @@ import AdminRoutes from "../admin/routes/AdminRoutes";
 function AppRoutes() {
   return (
     <BrowserRouter>
-      <>
-        <AdminRoutes />
+      <Routes>
+        {/* Website Routes */}
+        <Route element={<MainLayout />}>
+          <Route
+            path="/"
+            element={<Home />}
+          />
 
-        <Routes>
-          <Route element={<MainLayout />}>
-            <Route path="/" element={<Home />} />
+          <Route
+            path="/about"
+            element={<About />}
+          />
 
-            <Route
-              path="/about"
-              element={<About />}
-            />
+          <Route
+            path="/contact"
+            element={<Contact />}
+          />
+        </Route>
 
-            <Route
-              path="/chat"
-              element={<Chat />}
-            />
-
-            <Route
-              path="/contact"
-              element={<Contact />}
-            />
-          </Route>
-        </Routes>
-      </>
+        {/* Admin Routes */}
+        <Route
+          path="/admin/*"
+          element={<AdminRoutes />}
+        />
+      </Routes>
     </BrowserRouter>
   );
 }

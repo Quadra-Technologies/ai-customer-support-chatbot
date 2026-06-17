@@ -1,30 +1,63 @@
+import { useEffect, useState } from "react";
+
 import StatCard from "../../components/StatCard/StatCard";
+import Loader from "../../components/Loader/Loader";
+
+import { getAnalytics } from "../../../services/analyticsApi";
 
 const Dashboard = () => {
+  const [analytics, setAnalytics] =
+    useState(null);
+
+  const [loading, setLoading] =
+    useState(true);
+
+  useEffect(() => {
+    const fetchAnalytics =
+      async () => {
+        try {
+          const data =
+            await getAnalytics();
+
+          setAnalytics(data);
+        } catch (error) {
+          console.error(error);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+    fetchAnalytics();
+  }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
+
   const stats = [
     {
       title: "Total Leads",
-      value: 24,
+      value: analytics.totalLeads,
       color: "text-blue-600",
     },
     {
-      title: "New Leads Today",
-      value: 8,
+      title: "Today's Leads",
+      value: analytics.todayLeads,
       color: "text-green-600",
     },
     {
-      title: "Active Chats",
-      value: 15,
+      title: "Total Chats",
+      value: analytics.totalChats,
       color: "text-purple-600",
     },
     {
-      title: "Booked Events",
-      value: 6,
+      title: "Today's Chats",
+      value: analytics.todayChats,
       color: "text-orange-600",
     },
     {
       title: "Conversion Rate",
-      value: "25%",
+      value: `${analytics.conversionRate}%`,
       color: "text-red-600",
     },
   ];
@@ -50,68 +83,6 @@ const Dashboard = () => {
             color={stat.color}
           />
         ))}
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white rounded-xl shadow p-6">
-          <h2 className="text-xl font-semibold mb-4">
-            Recent Activity
-          </h2>
-
-          <ul className="space-y-3">
-            <li className="border-b pb-2">
-              🎉 New Wedding lead received
-            </li>
-
-            <li className="border-b pb-2">
-              📞 Customer contacted for Birthday Event
-            </li>
-
-            <li className="border-b pb-2">
-              ✅ Corporate Event booked
-            </li>
-
-            <li className="border-b pb-2">
-              💬 5 new chatbot conversations today
-            </li>
-          </ul>
-        </div>
-
-        <div className="bg-white rounded-xl shadow p-6">
-          <h2 className="text-xl font-semibold mb-4">
-            Quick Insights
-          </h2>
-
-          <div className="space-y-4">
-            <div className="flex justify-between">
-              <span>Most Popular Event</span>
-              <span className="font-bold">
-                Wedding
-              </span>
-            </div>
-
-            <div className="flex justify-between">
-              <span>Average Budget</span>
-              <span className="font-bold">
-                ₹3,50,000
-              </span>
-            </div>
-
-            <div className="flex justify-between">
-              <span>Lead Source</span>
-              <span className="font-bold">
-                AI Chatbot
-              </span>
-            </div>
-
-            <div className="flex justify-between">
-              <span>Top Conversion</span>
-              <span className="font-bold">
-                Corporate Events
-              </span>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

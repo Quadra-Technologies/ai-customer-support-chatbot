@@ -23,7 +23,7 @@ app.use(express.json());
 
 // Home Route
 app.get("/", (req, res) => {
-  res.send("Backend Running");
+res.send("Backend Running");
 });
 
 // API Routes
@@ -37,5 +37,5 @@ app.use("/api/analytics", analyticsRoutes);
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(`Server running on ${PORT}`);
+console.log(`Server running on ${PORT}`);
 });

@@ -5,40 +5,40 @@ const LeadTable = ({
   onView,
 }) => {
   return (
-    <div className="overflow-x-auto bg-white rounded-xl shadow">
+    <div className="overflow-x-auto bg-white rounded-2xl shadow-lg border border-gray-100">
       <table className="w-full">
-        <thead className="bg-gray-100">
+        <thead className="bg-slate-50 text-slate-700">
           <tr>
             <th className="p-3 text-left">Name</th>
             <th className="p-3 text-left">Email</th>
             <th className="p-3 text-left">Phone</th>
-            <th className="p-3 text-left">Event</th>
-            <th className="p-3 text-left">Guests</th>
-            <th className="p-3 text-left">Budget</th>
+            <th className="p-3 text-left">Requirement</th>
             <th className="p-3 text-left">Status</th>
+            <th className="p-3 text-left">Source</th>
             <th className="p-3 text-left">Actions</th>
           </tr>
         </thead>
 
         <tbody>
           {leads.map((lead) => (
-            <tr key={lead.id} className="border-t">
-              <td className="p-3">{lead.name}</td>
-
-              <td className="p-3">{lead.email}</td>
-
-              <td className="p-3">{lead.phone}</td>
-
+            <tr
+              key={lead._id}
+              className="border-t hover:bg-slate-50 transition"
+            >
               <td className="p-3">
-                {lead.eventType}
+                {lead.name}
               </td>
 
               <td className="p-3">
-                {lead.guests}
+                {lead.email}
               </td>
 
               <td className="p-3">
-                ₹{lead.budget}
+                {lead.phone}
+              </td>
+
+              <td className="p-3">
+                {lead.requirement}
               </td>
 
               <td className="p-3">
@@ -46,11 +46,11 @@ const LeadTable = ({
                   value={lead.status}
                   onChange={(e) =>
                     onStatusChange(
-                      lead.id,
+                      lead._id,
                       e.target.value
                     )
                   }
-                  className="border rounded p-1"
+                  className="border border-gray-300 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 >
                   <option>New</option>
                   <option>Contacted</option>
@@ -63,21 +63,25 @@ const LeadTable = ({
                 </select>
               </td>
 
+              <td className="p-3">
+                {lead.source}
+              </td>
+
               <td className="p-3 space-x-2">
                 <button
                   onClick={() =>
                     onView(lead)
                   }
-                  className="bg-blue-500 text-white px-3 py-1 rounded"
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 rounded-lg transition shadow"
                 >
                   View
                 </button>
 
                 <button
                   onClick={() =>
-                    onDelete(lead.id)
+                    onDelete(lead._id)
                   }
-                  className="bg-red-500 text-white px-3 py-1 rounded"
+                  className="bg-rose-500 hover:bg-rose-600 text-white px-3 py-1 rounded-lg transition shadow"
                 >
                   Delete
                 </button>

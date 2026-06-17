@@ -11,7 +11,6 @@ function Navbar() {
         <div className="hidden md:flex gap-8">
           <Link to="/">Home</Link>
           <Link to="/about">About</Link>
-          <Link to="/chat">Chat</Link>
           <Link to="/contact">Contact</Link>
         </div>
 

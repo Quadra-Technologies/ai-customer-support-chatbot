@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   BarChart,
   Bar,
@@ -10,22 +11,45 @@ import {
   Cell,
 } from "recharts";
 
-const Analytics = () => {
-  const monthlyData = [
-    { month: "Jan", leads: 20 },
-    { month: "Feb", leads: 35 },
-    { month: "Mar", leads: 50 },
-    { month: "Apr", leads: 40 },
-    { month: "May", leads: 65 },
-    { month: "Jun", leads: 80 },
-  ];
+import Loader from "../../components/Loader/Loader";
+import { getAnalytics } from "../../../services/analyticsApi";
 
-  const eventData = [
-    { name: "Wedding", value: 45 },
-    { name: "Birthday", value: 20 },
-    { name: "Corporate", value: 25 },
-    { name: "Others", value: 10 },
-  ];
+const Analytics = () => {
+  const [analytics, setAnalytics] =
+    useState(null);
+
+  const [loading, setLoading] =
+    useState(true);
+
+  useEffect(() => {
+    const fetchAnalytics =
+      async () => {
+        try {
+          const data =
+            await getAnalytics();
+
+          setAnalytics(data);
+        } catch (error) {
+          console.error(error);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+    fetchAnalytics();
+  }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  const statusData =
+    analytics.statusDistribution.map(
+      (item) => ({
+        name: item._id,
+        value: item.count,
+      })
+    );
 
   const COLORS = [
     "#3B82F6",
@@ -40,93 +64,77 @@ const Analytics = () => {
         Analytics Dashboard
       </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
         <div className="bg-white p-6 rounded-xl shadow">
           <h3>Total Leads</h3>
           <p className="text-3xl font-bold text-blue-600">
-            250
+            {analytics.totalLeads}
           </p>
         </div>
 
         <div className="bg-white p-6 rounded-xl shadow">
           <h3>Total Chats</h3>
           <p className="text-3xl font-bold text-green-600">
-            540
+            {analytics.totalChats}
           </p>
         </div>
 
         <div className="bg-white p-6 rounded-xl shadow">
-          <h3>Booked Events</h3>
+          <h3>Today's Leads</h3>
           <p className="text-3xl font-bold text-purple-600">
-            82
+            {analytics.todayLeads}
           </p>
         </div>
 
         <div className="bg-white p-6 rounded-xl shadow">
-          <h3>Revenue</h3>
+          <h3>Today's Chats</h3>
+          <p className="text-3xl font-bold text-orange-600">
+            {analytics.todayChats}
+          </p>
+        </div>
+
+        <div className="bg-white p-6 rounded-xl shadow">
+          <h3>Conversion Rate</h3>
           <p className="text-3xl font-bold text-red-600">
-            ₹12L
+            {analytics.conversionRate}%
           </p>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white p-6 rounded-xl shadow h-96">
-          <h2 className="text-xl font-semibold mb-4">
-            Monthly Leads
-          </h2>
+      <div className="bg-white p-6 rounded-xl shadow h-96">
+        <h2 className="text-xl font-semibold mb-4">
+          Lead Status Distribution
+        </h2>
 
-          <ResponsiveContainer
-            width="100%"
-            height="90%"
-          >
-            <BarChart data={monthlyData}>
-              <XAxis dataKey="month" />
-              <YAxis />
-              <Tooltip />
-              <Bar
-                dataKey="leads"
-                fill="#3B82F6"
-              />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
+        <ResponsiveContainer
+          width="100%"
+          height="90%"
+        >
+          <PieChart>
+            <Pie
+              data={statusData}
+              dataKey="value"
+              outerRadius={120}
+              label
+            >
+              {statusData.map(
+                (entry, index) => (
+                  <Cell
+                    key={index}
+                    fill={
+                      COLORS[
+                        index %
+                          COLORS.length
+                      ]
+                    }
+                  />
+                )
+              )}
+            </Pie>
 
-        <div className="bg-white p-6 rounded-xl shadow h-96">
-          <h2 className="text-xl font-semibold mb-4">
-            Event Distribution
-          </h2>
-
-          <ResponsiveContainer
-            width="100%"
-            height="90%"
-          >
-            <PieChart>
-              <Pie
-                data={eventData}
-                dataKey="value"
-                outerRadius={120}
-                label
-              >
-                {eventData.map(
-                  (entry, index) => (
-                    <Cell
-                      key={index}
-                      fill={
-                        COLORS[
-                          index %
-                            COLORS.length
-                        ]
-                      }
-                    />
-                  )
-                )}
-              </Pie>
-
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
+            <Tooltip />
+          </PieChart>
+        </ResponsiveContainer>
       </div>
     </div>
   );

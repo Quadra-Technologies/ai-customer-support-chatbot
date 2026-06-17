@@ -21,7 +21,8 @@
   "email": "string",
   "phone": "string",
   "requirement": "string",
-  "status": "string"
+  "status": "string",
+  "createdAt": "date"
 }
 ```
 
@@ -44,6 +45,7 @@
 ```json
 {
   "question": "string",
-  "answer": "string"
+  "answer": "string",
+  "category": "string"
 }
 ```

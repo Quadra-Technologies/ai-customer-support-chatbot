@@ -1,6 +1,6 @@
 # API Documentation
 
-## Authentication
+## Authentication API
 
 ### POST /api/auth/login
 
@@ -21,6 +21,59 @@ Response
   "token": "JWT_TOKEN"
 }
 ```
+
+Status Codes
+
+* 200 OK
+* 401 Unauthorized
+* 500 Internal Server Error
+
+---
+
+## Lead APIs
+
+### POST /api/leads
+
+Create a new lead.
+
+Request
+
+```json
+{
+  "name": "John",
+  "email": "john@gmail.com",
+  "phone": "9999999999",
+  "requirement": "Need chatbot"
+}
+```
+
+Response
+
+```json
+{
+  "success": true,
+  "message": "Lead created successfully"
+}
+```
+
+### GET /api/leads
+
+Fetch all leads.
+
+### PUT /api/leads/:id
+
+Update lead details.
+
+### DELETE /api/leads/:id
+
+Delete a lead.
+
+Status Codes
+
+* 200 OK
+* 201 Created
+* 404 Not Found
+* 500 Internal Server Error
 
 ---
 
@@ -45,43 +98,10 @@ Response
 }
 ```
 
----
+Status Codes
 
-## Leads API
-
-### POST /api/leads
-
-Request
-
-```json
-{
-  "name": "John",
-  "email": "john@gmail.com",
-  "phone": "9999999999",
-  "requirement": "Need chatbot"
-}
-```
-
-Response
-
-```json
-{
-  "success": true,
-  "message": "Lead created successfully"
-}
-```
-
-### GET /api/leads
-
-Response
-
-```json
-{
-  "success": true,
-  "count": 12,
-  "data": []
-}
-```
+* 200 OK
+* 500 Internal Server Error
 
 ---
 
@@ -103,11 +123,18 @@ Response
 }
 ```
 
+Status Codes
+
+* 200 OK
+* 500 Internal Server Error
+
 ---
 
 ## Conversations API
 
 ### GET /api/conversations
+
+Fetch all conversations.
 
 Response
 
@@ -122,30 +149,12 @@ Response
 ]
 ```
 
----
+### GET /api/conversations/:id
 
-## Status Codes
+Fetch a conversation by ID.
 
-### 200 OK
+Status Codes
 
-Request completed successfully.
-
-### 201 Created
-
-Resource created successfully.
-
-### 400 Bad Request
-
-Invalid request data.
-
-### 401 Unauthorized
-
-Authentication failed.
-
-### 404 Not Found
-
-Requested resource not found.
-
-### 500 Internal Server Error
-
-Unexpected server error.
+* 200 OK
+* 404 Not Found
+* 500 Internal Server Error
