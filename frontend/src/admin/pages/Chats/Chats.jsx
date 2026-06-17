@@ -1,75 +1,70 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 import SearchBar from "../../components/SearchBar/SearchBar";
 import ChatTable from "../../components/ChatTable/ChatTable";
-import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 import Pagination from "../../components/Pagination/Pagination";
 import EmptyState from "../../components/EmptyState/EmptyState";
+import Loader from "../../components/Loader/Loader";
+
+import {
+  getConversations,
+} from "../../../services/conversationApi";
 
 const Chats = () => {
   const [search, setSearch] = useState("");
 
-  const [chats, setChats] = useState([
-    {
-      id: 1,
-      customer: "Bhavani",
-      messages: 15,
-      leadGenerated: true,
-      date: "12-06-2026",
-    },
-    {
-      id: 2,
-      customer: "Rahul",
-      messages: 8,
-      leadGenerated: false,
-      date: "11-06-2026",
-    },
-    {
-      id: 3,
-      customer: "Priya",
-      messages: 22,
-      leadGenerated: true,
-      date: "10-06-2026",
-    },
-  ]);
+  const [chats, setChats] = useState([]);
 
-  const [showModal, setShowModal] =
-    useState(false);
-
-  const [selectedChat, setSelectedChat] =
-    useState(null);
+  const [loading, setLoading] =
+    useState(true);
 
   const [currentPage, setCurrentPage] =
     useState(1);
 
   const chatsPerPage = 5;
 
-  const handleDelete = (id) => {
-    setSelectedChat(id);
-    setShowModal(true);
+  const fetchChats = async () => {
+    try {
+      setLoading(true);
+
+      const data =
+        await getConversations();
+
+      setChats(data);
+    } catch (error) {
+      console.error(
+        "Error fetching chats:",
+        error
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const confirmDelete = () => {
-    setChats(
-      chats.filter(
-        (chat) => chat.id !== selectedChat
-      )
+  useEffect(() => {
+    fetchChats();
+  }, []);
+
+  const handleDelete = () => {
+    alert(
+      "Delete Conversation API is not implemented yet."
     );
-
-    setShowModal(false);
-    setSelectedChat(null);
   };
 
-  const cancelDelete = () => {
-    setShowModal(false);
-    setSelectedChat(null);
-  };
-
-  const filteredChats = chats.filter(
-    (chat) =>
-      chat.customer
-        .toLowerCase()
-        .includes(search.toLowerCase())
-  );
+  const filteredChats =
+    chats.filter(
+      (chat) =>
+        chat.userMessage
+          ?.toLowerCase()
+          .includes(
+            search.toLowerCase()
+          ) ||
+        chat.aiResponse
+          ?.toLowerCase()
+          .includes(
+            search.toLowerCase()
+          )
+    );
 
   const indexOfLastChat =
     currentPage * chatsPerPage;
@@ -84,12 +79,17 @@ const Chats = () => {
     );
 
   const totalPages = Math.ceil(
-    filteredChats.length / chatsPerPage
+    filteredChats.length /
+      chatsPerPage
   );
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
         <h1 className="text-3xl font-bold">
           Chat Monitoring
         </h1>
@@ -100,7 +100,8 @@ const Chats = () => {
         />
       </div>
 
-      {filteredChats.length === 0 ? (
+      {filteredChats.length ===
+      0 ? (
         <EmptyState message="No chats found." />
       ) : (
         <>
@@ -112,18 +113,12 @@ const Chats = () => {
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
-            setCurrentPage={setCurrentPage}
+            setCurrentPage={
+              setCurrentPage
+            }
           />
         </>
       )}
-
-      <ConfirmModal
-        isOpen={showModal}
-        title="Delete Chat"
-        message="Are you sure you want to delete this chat?"
-        onConfirm={confirmDelete}
-        onCancel={cancelDelete}
-      />
     </div>
   );
 };

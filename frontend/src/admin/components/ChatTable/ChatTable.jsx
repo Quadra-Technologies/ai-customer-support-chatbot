@@ -8,19 +8,15 @@ const ChatTable = ({
         <thead className="bg-gray-100">
           <tr>
             <th className="p-3 text-left">
-              Customer
+              User Message
             </th>
 
             <th className="p-3 text-left">
-              Messages
+              AI Response
             </th>
 
             <th className="p-3 text-left">
-              Lead Generated
-            </th>
-
-            <th className="p-3 text-left">
-              Date
+              Timestamp
             </th>
 
             <th className="p-3 text-left">
@@ -32,45 +28,33 @@ const ChatTable = ({
         <tbody>
           {chats.map((chat) => (
             <tr
-              key={chat.id}
+              key={chat._id}
               className="border-t"
             >
-              <td className="p-3">
-                {chat.customer}
+              <td className="p-3 max-w-xs">
+                <div className="truncate">
+                  {chat.userMessage}
+                </div>
+              </td>
+
+              <td className="p-3 max-w-sm">
+                <div className="truncate">
+                  {chat.aiResponse}
+                </div>
               </td>
 
               <td className="p-3">
-                {chat.messages}
+                {new Date(
+                  chat.timestamp
+                ).toLocaleString()}
               </td>
 
               <td className="p-3">
-                <span
-                  className={`px-3 py-1 rounded-full text-white ${
-                    chat.leadGenerated
-                      ? "bg-green-500"
-                      : "bg-red-500"
-                  }`}
-                >
-                  {chat.leadGenerated
-                    ? "Yes"
-                    : "No"}
-                </span>
-              </td>
-
-              <td className="p-3">
-                {chat.date}
-              </td>
-
-              <td className="p-3 space-x-2">
-                <button className="bg-blue-500 text-white px-3 py-1 rounded">
-                  View
-                </button>
-
                 <button
                   onClick={() =>
-                    onDelete(chat.id)
+                    onDelete(chat._id)
                   }
-                  className="bg-red-500 text-white px-3 py-1 rounded"
+                  className="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600"
                 >
                   Delete
                 </button>
