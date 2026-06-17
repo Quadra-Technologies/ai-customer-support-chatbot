@@ -6,7 +6,6 @@ import {
 
 import Home from "../Pages/Home/Home";
 import About from "../Pages/About/About";
-import Chat from "../Pages/Chat/Chat";
 import Contact from "../Pages/Contact/Contact";
 
 import MainLayout from "../layouts/MainLayout";
@@ -25,11 +24,6 @@ function AppRoutes() {
             <Route
               path="/about"
               element={<About />}
-            />
-
-            <Route
-              path="/chat"
-              element={<Chat />}
             />
 
             <Route
