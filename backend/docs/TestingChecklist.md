@@ -1,70 +1,53 @@
-# Backend API Testing Checklist
+# Backend Testing Checklist
 
 ## Authentication
 
-[x] Login Success
-
-[ ] Invalid Password
-
-[ ] Invalid Token
-
----
+* [x] Login Success
+* [ ] Invalid Password
+* [ ] Invalid Token
 
 ## Leads
 
-[x] Create Lead
-
-[x] Get Leads
-
-[ ] Update Lead
-
-[ ] Delete Lead
-
----
+* [x] Create Lead
+* [x] Get Leads
+* [x] Update Lead
+* [ ] Delete Lead
 
 ## Chat
 
-[x] Gemini Response
-
-[ ] Empty Message Validation
-
----
+* [x] Gemini Response
+* [x] Empty Message Validation
+* [ ] Error Handling
 
 ## Analytics
 
-[x] Total Leads
-
-[x] Total Chats
-
----
-
-## Conversations
-
-[x] Retrieve History
-
----
+* [x] Total Leads
+* [x] Total Chats
+* [x] Daily Stats
 
 ## Database
 
-[x] Data Saved
+* [x] Data Saved
+* [x] Data Updated
+* [ ] Data Deleted
 
-[ ] Data Updated
+## Conversations
 
-[ ] Data Deleted
+* [x] Retrieve History
+* [x] Conversation Storage Verified
 
----
+## Negative Testing
+
+* [x] Empty Message Validation
+* [ ] Invalid Email Validation
+* [ ] JWT Authorization Validation
 
 ## Deployment Verification
 
-[x] Backend Deployed on Render
-
-[x] MongoDB Atlas Connected
-
-[x] API Base URL Accessible
-
-[x] Production APIs Responding
-
----
+* [x] Backend Deployed on Render
+* [x] MongoDB Atlas Connected
+* [x] API Base URL Accessible
+* [x] Production APIs Responding
 
 ## Tested Endpoints
 
@@ -102,39 +85,39 @@ GET /api/conversations
 
 Status: PASSED
 
----
+## Pending Improvements
+
+* [x] JWT Route Protection (Verified)
+* [ ] Email Format Validation
+* [ ] DELETE /api/conversations/:id
+* [ ] Event Planner Schema Fields
+* [ ] Dynamic Gemini Response Verification
 
 ## Deployment Details
 
 Production URL:
 
-https://ai-customer-support-chatbot-0hlz.onrender.com
-
-API Base URL:
-
-https://ai-customer-support-chatbot-0hlz.onrender.com/api
-
----
+https://quadra-backend-a6jg.onrender.com
 
 ## Testing Summary
 
-Completed Tests:
-- JWT Login
-- Lead Creation
-- Lead Retrieval
-- Chat API
-- Analytics API
-- Conversations API
-- MongoDB Data Storage
-- Render Deployment Verification
+Completed:
 
-Pending Tests:
-- Invalid Password
-- Invalid Token
-- Lead Update
-- Lead Delete
-- Empty Message Validation
-- Data Update Verification
-- Data Delete Verification
+* JWT Login
+* Lead Creation
+* Lead Retrieval
+* Lead Update
+* Chat API
+* Analytics API
+* Conversations API
+* MongoDB Storage Verification
+* Render Deployment Verification
+* JWT Route Protection Verification
 
-Last Updated: 16-06-2026
+Pending:
+
+* Invalid Password Testing
+* Invalid Token Testing
+* Lead Delete Testing
+* Invalid Email Validation
+* Data Delete Verification
