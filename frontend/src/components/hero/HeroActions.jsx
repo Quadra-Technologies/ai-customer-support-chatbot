@@ -1,21 +1,37 @@
+import { Link } from "react-router-dom";
+
 const HeroActions = () => {
   return (
-    <div className="flex flex-col sm:flex-row gap-4 mt-8">
-      <button
+    <div className="flex flex-col sm:flex-row gap-4 mt-10">
+      <Link
+        to="/chat"
         className="
-          w-full sm:w-auto
-          bg-blue-600 text-white
-          px-6 py-3 rounded-lg
+        bg-indigo-600
+        hover:bg-indigo-700
+        text-white
+        px-8
+        py-4
+        rounded-xl
+        shadow-xl
+        transition
+        text-center
+        font-semibold
         "
       >
-        Start Chat
-      </button>
+        Start AI Chat
+      </Link>
 
       <button
         className="
-          w-full sm:w-auto
-          border border-blue-600 text-blue-600
-          px-6 py-3 rounded-lg
+        border-2
+        border-indigo-600
+        text-indigo-600
+        hover:bg-indigo-50
+        px-8
+        py-4
+        rounded-xl
+        transition
+        font-semibold
         "
       >
         Book Demo

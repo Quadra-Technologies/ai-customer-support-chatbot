@@ -29,11 +29,13 @@ const Login = () => {
     try {
       setLoading(true);
 
+      // CORRECT API CALL
       const data =
         await loginAdmin(
-          formData.email,
-          formData.password
+          formData
         );
+
+      console.log(data);
 
       localStorage.setItem(
         "adminToken",
@@ -42,7 +44,9 @@ const Login = () => {
 
       alert("Login Successful");
 
-      navigate("/admin/dashboard");
+      navigate(
+        "/admin/dashboard"
+      );
     } catch (error) {
       console.error(error);
 
@@ -88,13 +92,13 @@ const Login = () => {
           type="submit"
           disabled={loading}
           className="
-          w-full
-          bg-indigo-600
-          hover:bg-indigo-700
-          text-white
-          p-3
-          rounded-lg
-          transition
+            w-full
+            bg-indigo-600
+            hover:bg-indigo-700
+            text-white
+            p-3
+            rounded-lg
+            transition
           "
         >
           {loading

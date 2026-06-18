@@ -2,22 +2,34 @@ const MessageBubble = ({
   message,
   sender,
 }) => {
+  const isUser =
+    sender === "user";
+
   return (
     <div
       className={`flex ${
-        sender === "user"
+        isUser
           ? "justify-end"
           : "justify-start"
       }`}
     >
       <div
-        className={`max-w-[85%] md:max-w-md p-3 rounded-xl ${
-          sender === "user"
-            ? "bg-blue-600 text-white"
-            : "bg-gray-200 text-black"
-        }`}
+        className={`
+        max-w-[80%]
+        px-4
+        py-3
+        rounded-2xl
+        shadow-sm
+        ${
+          isUser
+            ? "bg-indigo-600 text-white rounded-br-md"
+            : "bg-gray-100 text-gray-800 rounded-bl-md"
+        }
+        `}
       >
-        {message}
+        <p className="text-sm leading-6">
+          {message}
+        </p>
       </div>
     </div>
   );

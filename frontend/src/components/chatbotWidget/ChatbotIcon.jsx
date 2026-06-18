@@ -1,37 +1,32 @@
 const ChatbotIcon = ({
   onClick,
 }) => {
-
   return (
-
     <button
-
       onClick={onClick}
-
       className="
       fixed
-      bottom-6
-      right-6
+      bottom-8
+      right-8
       w-16
       h-16
       rounded-full
-      bg-blue-600
+      bg-gradient-to-r
+      from-indigo-600
+      to-blue-600
       text-white
       text-3xl
-      shadow-xl
+      shadow-2xl
       z-50
       hover:scale-110
-      transition
+      transition-all
+      duration-300
+      animate-pulse
       "
-
     >
-
       💬
-
     </button>
-
   );
-
 };
 
 export default ChatbotIcon;

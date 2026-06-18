@@ -1,15 +1,11 @@
 import api from "./api";
 
 export const loginAdmin = async (
-  email,
-  password
+  credentials
 ) => {
   const response = await api.post(
     "/auth/login",
-    {
-      email,
-      password,
-    }
+    credentials
   );
 
   return response.data;
