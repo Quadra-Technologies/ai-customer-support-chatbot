@@ -2,19 +2,40 @@ const ChatHeader = () => {
   return (
     <div
       className="
-      bg-blue-600
+      bg-gradient-to-r
+      from-indigo-600
+      to-blue-600
       text-white
-      p-4
-      rounded-t-xl
+      p-5
       "
     >
-      <h2 className="text-xl font-semibold">
-        Event Planning Assistant
-      </h2>
+      <div className="flex items-center gap-3">
+        <div
+          className="
+          w-10
+          h-10
+          rounded-full
+          bg-white
+          text-indigo-600
+          flex
+          items-center
+          justify-center
+          font-bold
+          "
+        >
+          AI
+        </div>
 
-      <p className="text-sm opacity-80">
-        Ask anything about your event planning needs
-      </p>
+        <div>
+          <h2 className="text-lg font-bold">
+            Dream Events AI
+          </h2>
+
+          <p className="text-sm opacity-90">
+            Usually replies instantly
+          </p>
+        </div>
+      </div>
     </div>
   );
 };
