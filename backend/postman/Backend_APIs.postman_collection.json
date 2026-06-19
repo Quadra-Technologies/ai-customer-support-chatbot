@@ -1,0 +1,47 @@
+{
+  "info": {
+    "name": "AI Customer Support Chatbot APIs",
+    "_postman_id": "12345678-abcd-1234-abcd-1234567890ab",
+    "description": "Backend API Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Analytics API",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "https://ai-customer-support-chatbot-0hlz.onrender.com/api/analytics",
+          "protocol": "https",
+          "host": [
+            "ai-customer-support-chatbot-0hlz",
+            "onrender",
+            "com"
+          ],
+          "path": [
+            "api",
+            "analytics"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Conversations",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "https://ai-customer-support-chatbot-0hlz.onrender.com/api/conversations"
+        }
+      }
+    },
+    {
+      "name": "Get Leads",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "https://ai-customer-support-chatbot-0hlz.onrender.com/api/leads"
+        }
+      }
+    }
+  ]
+}
